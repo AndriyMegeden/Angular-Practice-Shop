@@ -1,0 +1,21 @@
+
+<div *ngIf="post$ | async as post; else loading" class="post">
+  <div class="header">
+    <h1>{{ post.title }}</h1>
+    <button routerLink="/" class="btn btn-dark">On main</button>
+  </div>
+  <div *ngIf="post.author && post.date && post.text">
+    <div class="">
+      <p>{{ post.author }}</p>
+    </div>
+    <div class="">
+      <small>{{ post.date | date : "medium" : "" : "uk" }}</small>
+    </div>
+    <div class="info">{{ post.text }}</div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>loading...</p>
+</ng-template>
+

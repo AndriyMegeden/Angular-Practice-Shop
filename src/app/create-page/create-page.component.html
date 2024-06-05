@@ -1,0 +1,51 @@
+<h1>Cтворення нового поста</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="post">
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('title')?.touched && form.get('title')?.invalid
+      }"
+    >
+      <label for="title">Name Post:</label>
+      <input formControlName="title" id="title" type="text" />
+      <div
+        class="validation"
+        *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+        style="color: red"
+      >
+        add title
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>content</label>
+      <input formControlName="text" type="text" />
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('author')?.touched && form.get('author')?.invalid
+      }"
+    >
+      <label for="author">Author:</label>
+      <input formControlName="author" id="author" type="text" />
+      <div
+        class="validation"
+        *ngIf="form.get('author')?.invalid && form.get('author')?.touched"
+        style="color: red"
+      >
+        add author
+      </div>
+    </div>
+
+    <button
+      class="btn btn-block btn-dark"
+      [disabled]="form.invalid"
+      type="submit"
+    >
+      create post
+    </button>
+  </div>
+</form>

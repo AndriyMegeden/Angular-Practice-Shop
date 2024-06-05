@@ -1,0 +1,27 @@
+<div *ngIf="auth.isAuth() === false" >
+  <form [formGroup]="form" (ngSubmit)="submit()" class="card">
+    <h2>зайти в панель адміна</h2>
+  
+    <div class="alert alert-danger" *ngIf="auth.error$ | async as error">{{error}}</div>
+  
+    <div class="form-control" [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}">
+      <label for="email">Email:</label>
+      <input formControlName="email" id="email" type="email" />
+      <div class="validation" *ngIf="form.get('email')?.invalid && form.get('email')?.touched " style="color: red">
+        Введіть коректний емейл
+      </div>
+    </div>
+    <div class="form-control" [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+  
+      <label for="password">password:</label>
+      <input formControlName="password" id="password" type="password" />
+      <div class="validation" *ngIf="form.get('password')?.invalid && form.get('password')?.touched " style="color: red">
+        Повинно бути не менше 6 символів
+      </div>
+    </div>
+    <button [disabled]="form.invalid || submited" class="btn btn-primary" type="submit">
+      Sign in
+    </button>
+  </form>
+</div>
+

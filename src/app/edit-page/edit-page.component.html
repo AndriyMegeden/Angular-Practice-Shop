@@ -1,0 +1,53 @@
+<div *ngIf="form; else loading">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('title')?.touched && form.get('title')?.invalid
+      }"
+    >
+      <label for="title">Название поста:</label>
+      <input id="title" type="text" formControlName="title">
+      <div
+        class="validation"
+        *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+        style="color: red"
+      >
+        add title
+      </div>
+    </div>
+
+   
+
+
+
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('text')?.touched && form.get('text')?.invalid
+      }"
+    >
+      <label for="text">Изменить текст:</label>
+      <input id="text" type="text" formControlName="text">
+      <div
+        class="validation"
+        *ngIf="form.get('text')?.invalid && form.get('text')?.touched"
+        style="color: red"
+      >
+        add text
+      </div>
+    </div>
+
+
+
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="form.invalid || submitted"
+    >Обновить</button>
+  </form>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

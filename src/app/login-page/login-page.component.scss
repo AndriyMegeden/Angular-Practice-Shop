@@ -1,0 +1,10 @@
+form {
+  width: 600px;
+  margin: 0 auto;
+  input {
+    background-color: white;
+  }
+  input:focus {
+    outline: none; 
+  }
+}

@@ -1,0 +1,39 @@
+<div *ngIf="posts.length; else loading">
+  <div class="form-control">
+    <input [(ngModel)]="searchStr" placeholder="Пошук" type="text" />
+  </div>
+  <table style="width: 400px">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Автор</th>
+        <th>Імя</th>
+        <th>Дата</th>
+        <th>Дія</th>
+      </tr>
+    </thead>
+    <body>
+      <!-- тут приміняємо наш пайп пошуку постів | searchPosts: searchStr-->
+      <tr *ngFor="let post of posts | searchPosts: searchStr; let idx = index">
+        <td>{{ idx + 1 }}</td>
+        <td>{{ post.author }}</td>
+        <td>{{ post.title }}</td>
+        <!-- '':'uk' це потрібно для вибору мови дати  -->
+        <td *ngIf="post.date">{{ post.date | date : 'medium':'':'uk' }}</td>
+        <td>
+          <button
+            [routerLink]="['/admin', 'post', post.id, 'edit']"
+            class="btn btn-link open"
+          >
+            Відкрити
+          </button>
+          <a (click)="remove(post.id)">Видалити</a>
+        </td>
+      </tr>
+    </body>
+  </table>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">download...</p>
+</ng-template>
